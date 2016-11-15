@@ -1,4 +1,4 @@
-package conifer.core.document
+package conifer.core
 
 // Each character has an `Id`.
 // An `Id` is usually made up of a `SiteId` and a `ClockValue`, but there are two special cases
@@ -10,15 +10,15 @@ sealed trait Id {
 }
 
 object Beginning extends Id {
-  override def <(that: Id) = true
+  def <(that: Id) = true
 }
 
 object Ending extends Id {
-  override def <(that: Id) = false
+  def <(that: Id) = false
 }
 
 case class SiteId(value: String) extends AnyVal {
-  override def <(that: SiteId) = this.value < that.value
+  def <(that: SiteId) = this.value < that.value
 }
 
 object SiteId {
@@ -29,7 +29,7 @@ object SiteId {
 
 case class ClockValue(value: Int) extends AnyVal {
   def incr: ClockValue = ClockValue(value + 1)
-  override def <(that: ClockValue) = this.value < that.value
+  def <(that: ClockValue) = this.value < that.value
 }
 
 

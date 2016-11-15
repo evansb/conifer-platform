@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Conifer Web Interface</title>
+    <link rel='stylesheet' href='css/bulma.min.css' />
+</head>
+
+<style>
+    nav {
+        padding: 10px;
+    }
+
+    #content, #output, #toolbar {
+        margin-top: 10px;
+    }
+
+    #toolbar {
+        background-color: #dbdbdb;
+    }
+
+    #editor {
+        width: 100%;
+        height: 600px;
+    }
+</style>
+
+<body>
+<div id="root" class="container">
+    <nav class="level">
+        <!-- Left side -->
+        <div class="level-left">
+            <div class="level-item">
+                <h1 class="title">Conifer Web</h1>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content" class="tile is-ancestor is-vertical is-fullwidth has-text-centered">
+        <div class="tile is-parent">
+            <div class="tile is-7">
+                <div id="editor">
+                </div>
+            </div>
+            <div class="tile is-vertical is-parent">
+                <div id="peers">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" charset="utf-8" src='js/ace.js'></script>
+    <script type="text/javascript" src="assets/frontend-fastopt.js"></script>
+    <script type="text/javascript" src="assets/frontend-launcher.js"></script>
+</body>
+</html>

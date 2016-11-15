@@ -2,16 +2,16 @@ package conifer.cli
 
 import java.nio.file.Paths
 import javax.inject._
-import akka.actor.ActorSystem
+
 import com.typesafe.scalalogging.LazyLogging
-import conifer.client.ClientActor
-import conifer.core.{ConiferConfig, GuiceAkkaExtension}
+import conifer.client.HttpService
+import conifer.core.ConiferConfig
 
 trait Handler {
   def handle(command: Command): Unit
 }
 
-class HandlerImpl @Inject() (appConfig: ConiferConfig, system: ActorSystem)
+class HandlerImpl @Inject() (appConfig: ConiferConfig, clientService: HttpService)
   extends Handler with LazyLogging {
 
   override def handle(command: Command): Unit = command match {
@@ -22,10 +22,11 @@ class HandlerImpl @Inject() (appConfig: ConiferConfig, system: ActorSystem)
       val rootDir = maybeRootDir.getOrElse(Paths.get("."))
       logger.debug(s"Creating a new session")
       logger.debug(s"Project directory is at $rootDir")
+      clientService.start()
 
     case JoinSession(maybePort) =>
       logger.debug(s"Joining a session")
-      system.actorOf(GuiceAkkaExtension(system).props(ClientActor.name))
+      clientService.start()
 
   }
 }

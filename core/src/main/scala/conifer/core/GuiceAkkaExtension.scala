@@ -14,15 +14,16 @@ trait GuiceAkkaActorRefProvider {
   def propsFor(system: ActorSystem, name: String): Props =
     GuiceAkkaExtension(system).props(name)
 
-  def provideActorRef(system: ActorSystem, name: String): ActorRef =
+  def provideActorRef(system: ActorSystem, name: String): ActorRef = {
     system.actorOf(propsFor(system, name))
+  }
 }
 
 class GuiceAkkaExtensionImpl extends Extension {
 
   private var injector: Injector = _
 
-  def initialize(injector: Injector) {
+  def initialize(injector: Injector): Unit = {
     this.injector = injector
   }
 
